@@ -3,18 +3,27 @@ function processForm() {
     qObj["Question"] = document.getElementById("question").value;
     qObj["Answer"] = document.getElementById("answer").value;
     */
+    
     var xhr = new XMLHttpRequest();
-    console.log("Test 1: " + xhr.readyState);
-    xhr.onreadystatechange = function (){
-      if (xhr.readyState === 4){
-        console.log("Test 2: " + xhr.readyState);
-        document.getElementById('response').innerHTML = xhr.responseText;
-      }
-    };
-    console.log("Test 3: " + xhr.readyState);
-    xhr.open('GET', 'xTestPHP.php');
-    console.log("Test 4: " + xhr.readyState);
-    xhr.send();
-    console.log("Test 5: " + xhr.readyState);
+
+    // Create some variables we need to send to our PHP file
+    var url = "xTestPHP.php";
+    var vars = "one";
+
+    xhr.open("POST", url, true);
+    //xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+
+    xhr.onreadystatechange = function() {
+        console.log(xhr);
+
+        if(xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById("response").innerHTML = xhr.responseText;
+        }
+    }
+
+    xhr.send(vars);
+    document.getElementById("response").innerHTML = "processing...";
 
 }
+
