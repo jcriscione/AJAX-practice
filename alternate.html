@@ -1,0 +1,45 @@
+<!--
+TESTING PURPOSES ONLY
+-->
+
+
+<!doctype html>
+<html>
+<head>
+    <title>Alt</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+    <script>
+    var xhr = new XMLHttpRequest();
+    console.log("Test 1: " + xhr.readyState);
+    xhr.onreadystatechange = function(){
+      if (xhr.readyState === 4) {
+        console.log("Test 2: " + xhr.readyState);
+        document.getElementById('response').innerHTML = xhr.responseText;
+      }
+    };
+    console.log("Test 3: " + xhr.readyState);
+    xhr.open('GET', 'submit.html');
+    console.log("Test 4: " + xhr.readyState);
+    function processForm() {
+      console.log("Test 5: " + xhr.readyState);
+      xhr.send();
+      console.log("Test 6: " + xhr.readyState);
+    }
+    </script>
+</head>
+  <body>
+    <div>
+      <form id="my-form">
+          <input type="text" name="qBody" placeholder="some question" id="question" />
+          <input type="text" name="qAns" placeholder="answer 1" id="answer" />
+          <button type="submit" onclick="processForm()">Go</button>
+      </form>
+    </div>
+    <div>
+      <p id="response"></p>
+    </div>
+  </body>
+</html>
